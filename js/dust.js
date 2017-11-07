@@ -32,4 +32,12 @@ function Dust(pos, r) {
         endShape(CLOSE);
         pop();
     }
+
+    this.checkEdges = function() {
+        if (this.pos.x > width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > height) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
