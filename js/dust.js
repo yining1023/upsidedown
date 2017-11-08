@@ -5,7 +5,7 @@ function Dust(pos, r) {
     this.opacity = random(0.1, 0.4);
     this.color = color('rgba(225, 225, 255, '+ this.opacity + ')');
 
-    this.vel = p5.Vector.random2D().div(2);
+    this.vel = p5.Vector.random2D().div(4);
     this.total = floor(random(50, 100));
     this.offset = [];
     for (let i = 0; i < this.total; i++) {
