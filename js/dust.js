@@ -1,6 +1,6 @@
 function Dust(pos, r) {
     this.pos = createVector(random(width), random(height));
-    this.r = random(2, 20);
+    this.r = random(2, 15);
 
     this.opacity = random(0.1, 0.4);
     this.color = color('rgba(225, 225, 255, '+ this.opacity + ')');
