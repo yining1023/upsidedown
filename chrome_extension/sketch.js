@@ -144,10 +144,8 @@ for(var h=a[g],i=4*g,j=0;j<4;j++){var k=h[j],l=new d.Vector((2*(1&k)-1)*c/2,((2&
     function draw() {
         background(color('rgba(10, 52, 92, 0.8)'));
         if (mouseIsPressed) {
-            // background(color('rgba(255, 255, 255, 0.8)'));
             lightColor = 'rgba(225, 225, 125, ';
         } else {
-            // background(color('rgba(10, 52, 92, 0.8)'));
             lightColor = 'rgba(74, 128, 176, ';
         }
 
@@ -155,10 +153,7 @@ for(var h=a[g],i=4*g,j=0;j<4;j++){var k=h[j],l=new d.Vector((2*(1&k)-1)*c/2,((2&
         for (let j = dusts.length - 1; j >= 0; j--) {
             dusts[j].render();
             dusts[j].update();
-            if (dusts[j].checkEdges()) {
-            dusts.splice(j, 1);
-            dusts.push(new Dust());
-            }
+            dusts[j].checkEdges();
         }
 
         drawLights();
@@ -240,17 +235,20 @@ for(var h=a[g],i=4*g,j=0;j<4;j++){var k=h[j],l=new d.Vector((2*(1&k)-1)*c/2,((2&
         }
 
         this.checkEdges = function() {
-            if (this.pos.x > width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > height) {
-                return true;
-            } else {
-                return false;
-            }
+            if (this.pos.x > width) this.pos.x = 0;
+            if (this.pos.x < 0) this.pos.x = width;
+            if (this.pos.y < 0) this.pos.y = height;
+            if (this.pos.y > height) this.pos.y = 0;
         }
     }
 
-    // todo: blink the lgiht when first trigger
-    // depth of the dusts?
-    // click mouse, light becomes to yellow
+    // todo: blink the light when first trigger
+
+    // click mouse, light becomes to yellow DONE!
+
+    // demo dog wonder around
     // yellow light kills demo dog
     // teticals around images or any things that has enough width and height
     // mouse click can also delete teticals
+
+    // depth of the dusts???
