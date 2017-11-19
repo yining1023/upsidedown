@@ -140,8 +140,8 @@ for(var h=a[g],i=4*g,j=0;j<4;j++){var k=h[j],l=new d.Vector((2*(1&k)-1)*c/2,((2&
     } 
 
     function draw() {
-        background(color('rgba(8, 26, 46, 0.8)'));
-        drawFlash();
+        // 19	52	92 8, 26, 46
+        background(color('rgba(10, 52, 92, 0.8)'));
         
         // Dusts
         for (let j = dusts.length - 1; j >= 0; j--) {
@@ -152,16 +152,40 @@ for(var h=a[g],i=4*g,j=0;j<4;j++){var k=h[j],l=new d.Vector((2*(1&k)-1)*c/2,((2&
             dusts.push(new Dust());
             }
         }
+
+        drawLights();
+        drawFlash();
+    }
+
+    function drawLights() {
+        let lightWidth = 60 * (height - mouseY) / 20;
+        if (lightWidth > 180) lightWidth = 180;
+        if (lightWidth < 60) lightWidth = 60;
+        let offset = width / 2 - mouseX;
+        let strokeS = 2;
+
+        strokeWeight(strokeS);
+        for (let p = 0; p < lightWidth * 2 - 1; p+=strokeS) {
+            let opacityC = map(Math.abs(lightWidth - p), 0, lightWidth, 1, 0.1);
+            stroke(color('rgba(74, 128, 176, ' + opacityC + ')'));
+            line(mouseX, mouseY, mouseX - lightWidth - offset + p, 0);
+        }
+        // stroke(color('rgba(255, 0, 0, ' + '0.9' + ')'));
+        // line(mouseX, mouseY, mouseX - lightWidth - offset, 0);
+        // line(mouseX, mouseY, mouseX + lightWidth - offset, 0);
     }
 
     function drawFlash() {
-        let radgrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 60);
-        radgrad.addColorStop(0, 'rgba(255,255,255,1)');
-        radgrad.addColorStop(0.8, 'rgba(255,255,255,.9)');
-        radgrad.addColorStop(1, 'rgba(255,255,255,0)');
+        let radgrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 48);
+        radgrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        radgrad.addColorStop(0.7, 'rgba(74, 128, 176, .8)');
+        radgrad.addColorStop(1, 'rgba(74, 128, 176, 0)');
       
         ctx.fillStyle = radgrad;
-        ctx.fillRect(mouseX - 70, mouseY - 70, 150, 150);
+        ctx.fillRect(mouseX - 58, mouseY - 58, 120, 120);
+        
+        fill(255);
+        ellipse(mouseX, mouseY, 5, 5);
     }
 
     function createDusts(num) {
