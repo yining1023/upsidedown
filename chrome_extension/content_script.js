@@ -3,9 +3,10 @@ let enabled = false;
 let reloadOnce = false;
 
 let toggle = function() {
+    console.log('enabled: ', enabled);
     if (enabled) {
         document.getElementById('p5Sketch').remove();
-        document.getElementById('p5Js').remove();
+        // document.getElementById('p5Js').remove();
 
         let canvas = document.getElementById('defaultCanvas0');
         if (canvas) {
@@ -18,13 +19,13 @@ let toggle = function() {
         }
     } else {
         // inject p5.js
-        let p5Js = document.createElement('script');
-        p5Js.id = "p5Js";
-        p5Js.type = "text/javascript";
-        p5Js.src = chrome.extension.getURL('p5.js');
+        // let p5Js = document.createElement('script');
+        // p5Js.id = "p5Js";
+        // p5Js.type = "text/javascript";
+        // p5Js.src = chrome.extension.getURL('p5.js');
         let head = document.getElementsByTagName('head')[0];
-        head.insertBefore(p5Js, head.childNodes[0]);
-        console.log("injected p5.js");
+        // head.insertBefore(p5Js, head.childNodes[0]);
+        // console.log("injected p5.js");
 
         // inject sketch.js
         let s = document.createElement('script');
